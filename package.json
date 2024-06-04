@@ -1,0 +1,49 @@
+{
+    "name": "hello-world",
+    "description": "Please enter a brief description here",
+    "version": "0.0.1",
+    "files": [
+        "out",
+        "src"
+    ],
+    "type": "module",
+    "scripts": {
+        "build": "tsc -b tsconfig.json",
+        "watch": "tsc -b tsconfig.json --watch",
+        "lint": "eslint src --ext ts",
+        "langium:generate": "langium generate",
+        "langium:watch": "langium generate --watch",
+        "build:web": "npm run build",
+        "bundle": "vite build",
+        "bundle:serve": "http-server ./dist --port 5175",
+        "dev": "vite",
+        "dev:debug": "vite --debug --force",
+        "serve": "npm run dev"
+    },
+    "dependencies": {
+        "langium": "~3.0.0",
+        "monaco-editor": "npm:@codingame/monaco-vscode-editor-api@~5.1.1",
+        "@codingame/monaco-vscode-keybindings-service-override": "~5.1.1",
+        "monaco-editor-wrapper": "~5.1.2",
+        "monaco-languageclient": "~8.4.0",
+        "vscode": "npm:@codingame/monaco-vscode-api@~5.1.1",
+        "vscode-ws-jsonrpc": "~3.3.1"
+
+
+    },
+    "devDependencies": {
+        "@types/node": "^18.0.0",
+        "@typescript-eslint/parser": "~7.3.1",
+        "@typescript-eslint/eslint-plugin": "~7.3.1",
+        "eslint": "~8.57.0",
+        "langium-cli": "~3.0.3",
+        "typescript": "~5.1.6",
+        "@codingame/esbuild-import-meta-url-plugin": "~1.0.2",
+        "vite": "~5.2.7",
+        "http-server": "~14.1.1"
+    },
+    "volta": {
+        "node": "18.19.1",
+        "npm": "10.2.4"
+    }
+}
