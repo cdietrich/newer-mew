@@ -1,20 +1,5 @@
-import getConfigurationServiceOverride from '@codingame/monaco-vscode-configuration-service-override';
-import getEditorServiceOverride from '@codingame/monaco-vscode-editor-service-override';
-import getKeybindingsServiceOverride from '@codingame/monaco-vscode-keybindings-service-override';
 import { LanguageClientConfig } from 'monaco-editor-wrapper';
-import { useOpenEditorStub } from 'monaco-editor-wrapper/vscode/services';
 import { useWorkerFactory } from 'monaco-editor-wrapper/workerFactory';
-
-export const defineUserServices = () => {
-    return {
-        userServices: {
-            ...getConfigurationServiceOverride(),
-            ...getEditorServiceOverride(useOpenEditorStub),
-            ...getKeybindingsServiceOverride()
-        },
-        debugLogging: true
-    }
-};
 
 export const configureMonacoWorkers = () => {
     // override the worker factory with your own direct definition
