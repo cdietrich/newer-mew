@@ -1,3 +1,4 @@
+import getConfigurationServiceOverride from '@codingame/monaco-vscode-configuration-service-override';
 import getEditorServiceOverride from '@codingame/monaco-vscode-editor-service-override';
 import getKeybindingsServiceOverride from '@codingame/monaco-vscode-keybindings-service-override';
 import { LanguageClientConfig } from 'monaco-editor-wrapper';
@@ -7,6 +8,7 @@ import { useWorkerFactory } from 'monaco-editor-wrapper/workerFactory';
 export const defineUserServices = () => {
     return {
         userServices: {
+            ...getConfigurationServiceOverride(),
             ...getEditorServiceOverride(useOpenEditorStub),
             ...getKeybindingsServiceOverride()
         },
@@ -33,10 +35,13 @@ export const configureWorker = (): LanguageClientConfig => {
     
 
     return {
-        languageId: 'hello-world',
+        languageId: 'hello',
         options: {
             $type: 'WorkerDirect',
             worker: lsWorker
-        }
+        },
+        // connectionProvider: {
+        //     get: async () => ({ reader, writer }),
+        // }
     }
 };

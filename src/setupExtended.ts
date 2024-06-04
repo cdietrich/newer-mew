@@ -1,5 +1,9 @@
 import { MonacoEditorLanguageClientWrapper, UserConfig } from 'monaco-editor-wrapper';
 import { configureWorker, defineUserServices } from './setupCommon.js';
+import getConfigurationServiceOverride from '@codingame/monaco-vscode-configuration-service-override';
+import getEditorServiceOverride from '@codingame/monaco-vscode-editor-service-override';
+import getKeybindingsServiceOverride from '@codingame/monaco-vscode-keybindings-service-override';
+import { useOpenEditorStub } from 'monaco-editor-wrapper/vscode/services';
 
 export const setupConfigExtended = (): UserConfig => {
     const extensionFilesOrContents = new Map();
@@ -8,7 +12,13 @@ export const setupConfigExtended = (): UserConfig => {
 
     return {
         wrapperConfig: {
-            serviceConfig: defineUserServices(),
+            serviceConfig: {
+                userServices: {
+                    ...getEditorServiceOverride(useOpenEditorStub),
+                    ...getKeybindingsServiceOverride()
+                },
+                debugLogging: true
+            },
             editorAppConfig: {
                 $type: 'extended',
                 codeResources: {
@@ -29,15 +39,15 @@ export const setupConfigExtended = (): UserConfig => {
                         },
                         contributes: {
                             languages: [{
-                                id: 'hello-world',
+                                id: 'hello',
                                 extensions: [
-                                    '.hello-world'
+                                    '.hello'
                                 ],
                                 configuration: './language-configuration.json'
                             }],
                             grammars: [{
-                                language: 'hello-world',
-                                scopeName: 'source.hello-world',
+                                language: 'hello',
+                                scopeName: 'source.hello',
                                 path: './hello-world-grammar.json'
                             }]
                         }

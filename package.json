@@ -40,7 +40,8 @@
         "typescript": "~5.1.6",
         "@codingame/esbuild-import-meta-url-plugin": "~1.0.2",
         "vite": "~5.2.7",
-        "http-server": "~14.1.1"
+        "http-server": "~14.1.1",
+        "vscode-languageserver-types": "~3.17.5"
     },
     "volta": {
         "node": "18.19.1",
