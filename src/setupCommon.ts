@@ -35,7 +35,7 @@ export const configureWorker = (): LanguageClientConfig => {
     
 
     return {
-        languageId: 'hello',
+        languageId: 'hello-world-languageid',
         options: {
             $type: 'WorkerDirect',
             worker: lsWorker

@@ -1,6 +1,5 @@
 import { MonacoEditorLanguageClientWrapper, UserConfig } from 'monaco-editor-wrapper';
-import { configureWorker, defineUserServices } from './setupCommon.js';
-import getConfigurationServiceOverride from '@codingame/monaco-vscode-configuration-service-override';
+import { configureWorker } from './setupCommon.js';
 import getEditorServiceOverride from '@codingame/monaco-vscode-editor-service-override';
 import getKeybindingsServiceOverride from '@codingame/monaco-vscode-keybindings-service-override';
 import { useOpenEditorStub } from 'monaco-editor-wrapper/vscode/services';
@@ -39,14 +38,14 @@ export const setupConfigExtended = (): UserConfig => {
                         },
                         contributes: {
                             languages: [{
-                                id: 'hello',
+                                id: 'hello-world-id',
                                 extensions: [
                                     '.hello'
                                 ],
                                 configuration: './language-configuration.json'
                             }],
                             grammars: [{
-                                language: 'hello',
+                                language: 'hello-world-id',
                                 scopeName: 'source.hello',
                                 path: './hello-world-grammar.json'
                             }]

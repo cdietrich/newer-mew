@@ -39,14 +39,15 @@ export const setupConfigClassic = (): UserConfig => {
                     main: {
                         text: `// Hello World is running in the web!`,
                         fileExt: 'hello',
-                        enforceLanguageId: 'hello'
+                        enforceLanguageId: 'hello-world-id'
                     }
                 },
                 useDiffEditor: false,
                 languageDef: {
                     monarchLanguage: monarchSyntax,
                     languageExtensionConfig: {
-                        id: 'hello'
+                        id: 'hello-world-id',
+                        extensions: ['.hello']
                     }
                 },
                 editorOptions: {
