@@ -1,11 +1,9 @@
-import { MonacoEditorLanguageClientWrapper, UserConfig } from 'monaco-editor-wrapper';
-import { configureWorker } from './setupCommon.js';
+import { LanguageClientConfig, MonacoEditorLanguageClientWrapper, UserConfig } from 'monaco-editor-wrapper';
 import monarchSyntax from "./syntaxes/hello-world.monarch.js";
 import getConfigurationServiceOverride from '@codingame/monaco-vscode-configuration-service-override';
 import getEditorServiceOverride from '@codingame/monaco-vscode-editor-service-override';
 import getKeybindingsServiceOverride from '@codingame/monaco-vscode-keybindings-service-override';
 import { useOpenEditorStub } from 'monaco-editor-wrapper/vscode/services';
-// import { Uri } from 'vscode';
 
 export const setupConfigClassic = (): UserConfig => {
     return {
@@ -58,6 +56,26 @@ export const setupConfigClassic = (): UserConfig => {
         },
         languageClientConfig: configureWorker()
     };
+};
+
+export const configureWorker = (): LanguageClientConfig => {
+    // vite does not extract the worker properly if it is URL is a variable
+    const lsWorker = new Worker(new URL('./language/main-browser', import.meta.url), {
+        type: 'module',
+        name: 'HelloWorld Language Server'
+    });
+    
+
+    return {
+        languageId: 'hello-world-id',
+        options: {
+            $type: 'WorkerDirect',
+            worker: lsWorker
+        },
+        // connectionProvider: {
+        //     get: async () => ({ reader, writer }),
+        // }
+    }
 };
 
 export const executeClassic = async (htmlElement: HTMLElement) => {
