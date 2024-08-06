@@ -4,6 +4,8 @@ import getConfigurationServiceOverride from '@codingame/monaco-vscode-configurat
 import getEditorServiceOverride from '@codingame/monaco-vscode-editor-service-override';
 import getKeybindingsServiceOverride from '@codingame/monaco-vscode-keybindings-service-override';
 import { useOpenEditorStub } from 'monaco-editor-wrapper/vscode/services';
+import { createModelReference } from 'vscode/monaco';
+import { Uri } from 'monaco-editor';
 
 export const setupConfigClassic = (): UserConfig => {
     return {
@@ -82,4 +84,7 @@ export const executeClassic = async (htmlElement: HTMLElement) => {
     const userConfig = setupConfigClassic();
     const wrapper = new MonacoEditorLanguageClientWrapper();
     await wrapper.initAndStart(userConfig, htmlElement);
+
+    const modelRef = await createModelReference(Uri.parse("others.hello"), `person PersonA person PersonB`)
+     modelRef.object.setLanguageId("hello")
 };
